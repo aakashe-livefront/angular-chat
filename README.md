@@ -82,8 +82,6 @@ This project was built to demonstrate:
 - **Best Practices** - Standalone components, signals, modern DI
 - **Real-world Patterns** - Service-based architecture, reactive state
 
-Check `presentation-outline.md` for a detailed guide on Angular's evolution.
-
 ## Technologies
 
 - **Angular 20.3** - Latest Angular framework
