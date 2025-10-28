@@ -1,0 +1,18 @@
+<!-- 
+  Main App Component Template
+  Application shell that composes child components
+  
+  Angular 19 Best Practices:
+  - Component composition with clear separation of concerns
+  - Each component handles its own responsibilities
+  - Clean, semantic HTML structure
+  - Responsive layout with Flexbox
+-->
+
+<div class="flex flex-col h-screen bg-surface-50">
+  <app-chat-header />
+  
+  <app-message-list class="flex-1" />
+  
+  <app-message-input />
+</div>

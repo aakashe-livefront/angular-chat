@@ -1,0 +1,48 @@
+<!-- 
+  MessageInput Component Template
+  Handles user input for sending messages to the AI assistant
+  
+  Angular 19 patterns:
+  - Template-driven forms with [(ngModel)]
+  - Event binding with (ngSubmit) and (keydown)
+  - Property binding with [disabled]
+  - Signal-based state from ChatStateService
+-->
+
+<div class="border-t border-surface-200 bg-white shadow-lg">
+  <div class="max-w-4xl mx-auto p-6">
+    <!-- Message Form -->
+    <form (ngSubmit)="sendMessage()" class="flex gap-3">
+      <!-- Text Input Area -->
+      <div class="flex-1">
+        <textarea
+          pInputTextarea
+          [(ngModel)]="userInput"
+          name="message"
+          placeholder="Ask me about Angular concepts, signals, components, or any Angular question..."
+          rows="3"
+          class="w-full resize-none"
+          [disabled]="isStreaming()"
+          (keydown)="handleKeyPress($event)"
+          aria-label="Message input"
+        ></textarea>
+      </div>
+      
+      <!-- Send Button -->
+      <div class="flex flex-col gap-2">
+        <p-button
+          type="submit"
+          label="Send"
+          [disabled]="!userInput.trim() || isStreaming()"
+          styleClass="h-full"
+          [attr.aria-label]="isStreaming() ? 'Waiting for response' : 'Send message'"
+        />
+      </div>
+    </form>
+    
+    <!-- Help Text -->
+    <p class="text-xs text-surface-500 mt-2">
+      Press Enter to send, Shift+Enter for new line
+    </p>
+  </div>
+</div>

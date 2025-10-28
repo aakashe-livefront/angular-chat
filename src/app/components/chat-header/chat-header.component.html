@@ -1,0 +1,32 @@
+<!-- 
+  ChatHeader Component Template
+  Displays the application header with title, message count, and controls
+  
+  Angular 19 patterns used:
+  - @if control flow syntax instead of *ngIf
+  - Signal-based reactive state (messageCount, isStreaming)
+  - PrimeNG components with standalone imports
+-->
+<div class="bg-primary text-primary-contrast shadow-lg px-6 py-4">
+  <div class="flex items-center justify-between max-w-7xl mx-auto">
+    <!-- App Title Section -->
+    <div class="flex items-center gap-4">
+      <span class="text-2xl">💬</span>
+      <div>
+        <h1 class="text-xl font-bold">Angular Learning Assistant</h1>
+        <p class="text-xs opacity-80">Your AI-powered Angular educator & mentor</p>
+      </div>
+    </div>
+    
+    <!-- Controls Section -->
+    <div class="flex items-center gap-3">
+      <!-- Streaming Indicator -->
+      @if (isStreaming()) {
+        <p-chip
+          label="⏳ Streaming..."
+          styleClass="bg-primary-emphasis"
+        />
+      }
+    </div>
+  </div>
+</div>

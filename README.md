@@ -1,59 +1,104 @@
-# AngularChat
+# Angular Chat
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+An educational Angular chat application demonstrating modern Angular 19 patterns and best practices.
 
-## Development server
+## What is this?
 
-To start a local development server, run:
+A chat app powered by AI that teaches Angular concepts while you use it. Built to showcase the latest Angular features including:
 
-```bash
-ng serve
-```
+- **Standalone Components** - No NgModules required
+- **Signals** - Modern reactive state management
+- **New Control Flow** - `@if`, `@for`, `@switch` syntax
+- **SSR Support** - Server-side rendering with `@angular/ssr`
+- **OnPush Change Detection** - Optimized performance
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Prerequisites
 
-## Code scaffolding
+- Node.js (v18 or higher)
+- npm or yarn
+- OpenRouter API key (for AI chat functionality)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Installation
 
 ```bash
-ng generate --help
+# Clone the repository
+git clone <your-repo-url>
+cd angular-chat
+
+# Install dependencies
+npm install
 ```
 
-## Building
+## Configuration
 
-To build the project run:
+Create a `.env` file in the project root:
+
+```env
+NG_APP_OPENROUTER_API_KEY=your_api_key_here
+NG_APP_OPENROUTER_MODEL=anthropic/claude-haiku-4.5
+```
+
+Get your API key from [OpenRouter](https://openrouter.ai/).
+
+## Development
 
 ```bash
-ng build
+# Start development server
+npm start
+
+# Open browser to http://localhost:4200
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Build
 
 ```bash
-ng test
+# Production build
+npm run build
+
+# Run SSR server
+npm run serve
 ```
 
-## Running end-to-end tests
+## Project Structure
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```
+src/app/
+├── components/           # UI components
+│   ├── chat-header/     # App header
+│   ├── message-list/    # Message display
+│   └── message-input/   # User input
+├── services/            # Business logic
+│   ├── chat-state.service.ts    # State management
+│   └── openrouter.service.ts    # AI API integration
+├── interfaces/          # TypeScript interfaces
+└── app.ts              # Root component
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Educational Purpose
 
-## Additional Resources
+This project was built to demonstrate:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Angular 19 vs Angular 12** - See `message-list.module.angular12-example.md` for comparison
+- **Best Practices** - Standalone components, signals, modern DI
+- **Real-world Patterns** - Service-based architecture, reactive state
+
+Check `presentation-outline.md` for a detailed guide on Angular's evolution.
+
+## Technologies
+
+- **Angular 20.3** - Latest Angular framework
+- **TypeScript 5.9** - Type-safe development
+- **PrimeNG 20.2** - UI component library
+- **Tailwind CSS 4.1** - Utility-first styling
+- **OpenRouter API** - AI integration
+- **Express** - SSR server
+
+## License
+
+MIT
+
+## Learn More
+
+- [Angular Documentation](https://angular.dev)
+- [Angular Signals Guide](https://angular.dev/guide/signals)
+- [Standalone Components](https://angular.dev/guide/components/importing)

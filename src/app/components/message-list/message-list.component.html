@@ -1,0 +1,108 @@
+<!-- 
+  MessageList Component Template
+  Displays the chat message history with auto-scrolling
+  
+  Angular 19 patterns:
+  - @if/@for control flow (Angular 12 would use *ngIf/*ngFor)
+  - Track expressions in @for loops for performance
+  - Class bindings with [class.name] syntax
+  - Signal-based reactive state from ChatStateService
+-->
+
+<!--
+  Messages Container with scroll handling
+  flex-1 makes it grow within the host flex container
+  overflow-y-auto enables vertical scrolling when content exceeds height
+  The host component constrains the overall height with its flex-1 class
+-->
+<div class="flex-1 overflow-y-auto py-6" #messagesContainer>
+  <div class="max-w-4xl mx-auto px-6">
+    <!-- Empty State - shown when no messages -->
+    @if (messages().length === 0) {
+      <div class="flex flex-col items-center justify-center h-full text-surface-500 min-h-[400px]">
+        <span class="text-8xl mb-4 opacity-30 block">💬</span>
+        <h2 class="text-2xl font-semibold mb-2">Ready to Learn Angular!</h2>
+        <p class="text-center opacity-75 max-w-md">
+          Ask me about Angular concepts, best practices, signals, standalone components, 
+          or any Angular development questions you have!
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2 justify-center">
+          <span class="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">Signals</span>
+          <span class="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">Components</span>
+          <span class="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">RxJS</span>
+          <span class="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">Directives</span>
+          <span class="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">Services</span>
+        </div>
+      </div>
+    }
+
+    <!-- Messages List -->
+    <div class="space-y-4">
+      <!-- 
+        @for loop with track - Angular 19 syntax
+        In Angular 12: *ngFor="let message of messages; trackBy: trackById"
+      -->
+      @for (message of messages(); track message.id) {
+        <div
+          class="flex gap-3"
+          [class.flex-row-reverse]="message.role === 'user'"
+        >
+          <!-- Avatar -->
+          <div class="flex-shrink-0">
+            <p-avatar
+              [label]="message.role === 'user' ? 'U' : 'AI'"
+              [style]="{
+                'background-color': message.role === 'user' ? 'var(--p-primary-color)' : 'var(--p-surface-700)', 
+                'color': 'white'
+              }"
+              shape="circle"
+              size="large"
+            />
+          </div>
+
+          <!-- Message Content -->
+          <div class="flex-1 max-w-[80%]">
+            <!-- Message Header with sender and time -->
+            <div class="flex items-baseline gap-2 mb-1"
+                 [class.flex-row-reverse]="message.role === 'user'">
+              <span class="text-sm font-semibold text-surface-700">
+                {{ message.role === 'user' ? 'You' : 'Assistant' }}
+              </span>
+              <span class="text-xs text-surface-500">
+                {{ formatTime(message.timestamp) }}
+              </span>
+            </div>
+
+            <!-- Message Bubble -->
+            <div
+              class="rounded-lg p-4 shadow-sm"
+              [class.bg-primary]="message.role === 'user'"
+              [class.text-primary-contrast]="message.role === 'user'"
+              [class.bg-white]="message.role === 'assistant'"
+              [class.border]="message.role === 'assistant'"
+              [class.border-surface-200]="message.role === 'assistant'"
+            >
+              <!-- Message Text -->
+              <div class="whitespace-pre-wrap">{{ message.content }}</div>
+              
+              <!-- Streaming Indicator -->
+              @if (message.isStreaming) {
+                <span class="inline-block ml-2 animate-pulse">
+                  ...
+                </span>
+              }
+              
+              <!-- Error Display -->
+              @if (message.error) {
+                <div class="mt-2 text-sm text-red-600 flex items-center gap-2">
+                  <span>⚠️</span>
+                  {{ message.error }}
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

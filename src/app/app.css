@@ -1,0 +1,35 @@
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Message animation */
+:host ::ng-deep .space-y-4 > div {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Scrollbar styling */
+:host ::ng-deep *::-webkit-scrollbar {
+  width: 8px;
+}
+
+:host ::ng-deep *::-webkit-scrollbar-track {
+  background: var(--p-surface-100);
+}
+
+:host ::ng-deep *::-webkit-scrollbar-thumb {
+  background: var(--p-surface-400);
+  border-radius: 4px;
+}
+
+:host ::ng-deep *::-webkit-scrollbar-thumb:hover {
+  background: var(--p-surface-500);
+}
+

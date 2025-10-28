@@ -1,12 +1,19 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { 
+  ChatHeaderComponent, 
+  MessageListComponent, 
+  MessageInputComponent 
+} from './components';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    ChatHeaderComponent,
+    MessageListComponent,
+    MessageInputComponent
+  ],
+  templateUrl: './app.component.html',
   styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('angular-chat');
-}
+export class App {}
